@@ -19,8 +19,16 @@ $ go run source.go
 */
 
 package main
+import "os"
 import "os/exec"
 import "runtime"
+import "encoding/json"
+
+type Configuration struct {
+  main []string
+  name []string
+  window []string
+}
 
 func main() {
   myos := runtime.GOOS;
@@ -36,10 +44,22 @@ func main() {
       chrome = "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe";
     }          
 
-    cmdopen = exec.Command(chrome, "--app=http://icanhazip.com");
-    err := cmdopen.Start();
+    // Read config
+    file, _ := os.Open("C:/Program Files (x86)/Attendedbyhumans/package.json");
+    decoder := json.NewDecoder(file);
+    configuration := Configuration{};
+    err := decoder.Decode(&configuration);
     if err != nil {
-      println("Failed: ", err);
+      println("error: ", err);
+    }
+
+    println(configuration.main);
+
+    // Execute
+    cmdopen = exec.Command(chrome, "--app=http://icanhazip.com");
+    err1 := cmdopen.Start();
+    if err1 != nil {
+      println("Failed: ", err1);
     } 
 
   } else {

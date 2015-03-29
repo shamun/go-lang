@@ -1,0 +1,15 @@
+{
+  "name": "Windows 8.1 - Tweak", 
+  "main": "index.html",
+  "window" : {
+    "title": "Test NV",
+    "toolbar" : false, 
+    "frame" : true,
+    "resizable": false, 
+    "kiosk": false,
+    "always-on-top": true,
+    "width":300,
+    "height":200,
+    "show": true
+  }
+}
