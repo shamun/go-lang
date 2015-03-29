@@ -1,4 +1,3 @@
-
 /*
 
 This program is free software: you can redistribute it and/or modify
@@ -31,26 +30,19 @@ func main() {
 
   if myos == "windows" {
     if myarch == "386" {
-      chrome = "C:/Program Files/Attendedbyhumans/Eid.jar";
-    } else {
-      chrome = "C:/Program Files (x86)/Attendedbyhumans/Eid.jar";
+      chrome = "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe";
+    } else {      
+      //chrome = "C:/Program Files/Google/Chrome/Application/chrome.exe";
+      chrome = "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe";
     }          
 
-    cmdopen = exec.Command("java", "-cp", chrome, "eid.Eid");
+    cmdopen = exec.Command(chrome, "--app=http://icanhazip.com");
     err := cmdopen.Start();
     if err != nil {
       println("Failed: ", err);
     } 
 
   } else {
-    chrome = "/root/Eid.jar";       
-    cmdopen = exec.Command("java", "-cp", chrome, "eid.Eid");
-    err := cmdopen.Start();
-    if err != nil {
-      println("Failed: ", err);
-    } 
-
+    println("Incompatible");
   } 
-
-
 }
